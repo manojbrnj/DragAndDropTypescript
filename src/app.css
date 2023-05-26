@@ -41,8 +41,18 @@ button {
   background: #ff0062;
   border: 1px solid #ff0062;
   cursor: pointer;
-  color: white;
-  padding: 0.75rem 1rem;
+  color: rgb(22, 1, 1);
+  display: flex;
+  width: 200px;
+  padding: 1px;
+  font-weight: 800;
+  align-items: center;
+  border-radius: 8px;
+}
+.btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
 }
 
 button:focus {
@@ -120,8 +130,29 @@ button:active {
 }
 
 #user-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: left;
   margin: 1rem;
   padding: 1rem;
-  border: 1px solid #ff0062;
+  /* border: 1px solid #ff0062; */
   background: #f7f7f7;
+  box-shadow: 0px 10px 32px #ccccccc5;
+  border-radius: 8px;
+}
+
+#title,
+#people,
+#description {
+  padding: 10px 22px;
+  align-items: center;
+  outline: none;
+  /* border: 1px solid #ff0062; */
+  /* box-shadow: 2px 0px 10px 2px #ccccccd0; */
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 18px;
+  color: #050222;
+  font-weight: 500;
 }

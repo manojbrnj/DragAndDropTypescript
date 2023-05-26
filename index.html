@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>ProjectManager</title>
-    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" type="text/css" href="./src/app.css" />
     <script src="dist/app.js" defer></script>
   </head>
   <body>
@@ -23,7 +23,23 @@
           <label for="people">People</label>
           <input type="number" id="people" step="1" min="0" max="10" />
         </div>
-        <button type="submit">ADD PROJECT</button>
+        <button type="submit">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="btn"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>ADD PROJECT</span>
+        </button>
       </form>
     </template>
     <template id="single-project">
@@ -40,4 +56,3 @@
     <div id="app"></div>
   </body>
 </html>
-s
