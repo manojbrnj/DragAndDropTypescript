@@ -39,20 +39,25 @@ textarea:focus {
 button {
   font: inherit;
   background: #ff0062;
-  border: 1px solid #ff0062;
+  border: 0px solid #ff0062;
   cursor: pointer;
   color: rgb(22, 1, 1);
   display: flex;
-  width: 200px;
-  padding: 1px;
+  max-width: 180px;
   font-weight: 800;
   align-items: center;
   border-radius: 8px;
+
+  padding: 0px;
+  margin: 0px;
 }
 .btn {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  font-size: 10px;
 }
 
 button:focus {

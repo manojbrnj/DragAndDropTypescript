@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 function autoBind(_, _2, descriptor) {
     const orignaMethodName = descriptor.value;
     const adjDescriptor = {
+        configurable: true,
         get() {
             const bindMethod = orignaMethodName.bind(this);
             return bindMethod;
@@ -21,10 +22,10 @@ class Project {
         this.hostEl = document.querySelector('#app');
         const importContent = document.importNode(this.templateEl.content, true);
         this.element = importContent.firstElementChild;
+        this.title = this.element.querySelector('#title');
+        this.description = this.element.querySelector('#description');
+        this.people = this.element.querySelector('#people');
         this.element.id = 'user-input';
-        this.title = document.querySelector('#title');
-        this.description = document.querySelector('#description');
-        this.people = document.querySelector('#people');
         this.attach();
         this.config();
     }
@@ -33,10 +34,32 @@ class Project {
     }
     submitHandler(event) {
         event.preventDefault();
-        console.log(this);
+        const userInput = this.gatherInput();
+        if (Array.isArray(userInput)) {
+            const [title, description, people] = userInput;
+            console.log(title, description, people);
+            this.clearInput();
+        }
     }
     config() {
         this.element.addEventListener('submit', this.submitHandler);
+    }
+    clearInput() {
+        this.title.value = '';
+        this.description.value = '';
+        this.people.value = '';
+    }
+    gatherInput() {
+        let enteredtTitle = this.title.value;
+        let enteredDescription = this.description.value;
+        let enteredPeople = this.people.value;
+        if (enteredtTitle.trim().length === 0 || enteredDescription.trim().length === 0 || enteredPeople.trim().length === 0) {
+            alert("invalid input form user");
+            return;
+        }
+        else {
+            return [enteredtTitle, enteredDescription, +enteredPeople];
+        }
     }
 }
 __decorate([

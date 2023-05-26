@@ -104,7 +104,7 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true,
+    // "skipLibCheck": true,
     "outDir": "dist",
     "rootDir": "src",
     "experimentalDecorators": true,
