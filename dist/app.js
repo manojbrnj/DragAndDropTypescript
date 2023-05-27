@@ -5,6 +5,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+function validate(validatableInput) {
+    //check all input  if  false doesnt match falis.
+    let isValid = true;
+    if (validatableInput.required) {
+        isValid = isValid && validatableInput.value.toString().trim().length !== 0;
+    }
+    // console.log("required", isValid);
+    if (validatableInput.minLength != null && typeof validatableInput.value === 'string') {
+        isValid = isValid && validatableInput.value.length >= validatableInput.minLength;
+    }
+    // console.log("minLength", isValid);
+    if (validatableInput.maxLength != null && typeof validatableInput.value === 'string') {
+        isValid = isValid && validatableInput.value.toString().trim.length <= validatableInput.maxLength;
+    }
+    // console.log("maxLength", isValid);
+    if (validatableInput.min != null && typeof validatableInput.value === 'number') {
+        isValid = isValid && validatableInput.value >= validatableInput.min;
+    }
+    // console.log("min", isValid);
+    if (validatableInput.max != null && typeof validatableInput.value === 'number') {
+        isValid = isValid && validatableInput.value <= validatableInput.max;
+    }
+    // console.log("max", isValid);
+    return isValid;
+}
 function autoBind(_, _2, descriptor) {
     const orignaMethodName = descriptor.value;
     const adjDescriptor = {
@@ -53,7 +78,11 @@ class Project {
         let enteredtTitle = this.title.value;
         let enteredDescription = this.description.value;
         let enteredPeople = this.people.value;
-        if (enteredtTitle.trim().length === 0 || enteredDescription.trim().length === 0 || enteredPeople.trim().length === 0) {
+        if (!validate({ value: enteredtTitle, required: true, minLength: 5 })
+            ||
+                !validate({ value: enteredDescription, required: true, minLength: 5 })
+            ||
+                !validate({ value: +enteredPeople, required: true, minLength: 5 })) {
             alert("invalid input form user");
             return;
         }
@@ -65,6 +94,4 @@ class Project {
 __decorate([
     autoBind
 ], Project.prototype, "submitHandler", null);
-// private handleSubmit(){
-// }
 const proj = new Project();
