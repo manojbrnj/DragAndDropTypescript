@@ -52,6 +52,65 @@ function autoBind(_: any, _2: string, descriptor: PropertyDescriptor) {
 }
 
 
+class ProjectState {
+
+  private projects: any[] = [];
+  private static instance: ProjectState;
+  constructor() {
+    //title: string, description: string, people: number
+  }
+
+  static addProject(title: string, description: string, people: number) {
+    const newProject = {
+      id: Math.random().toString(),
+      title: title,
+      description: description,
+      people: people
+    }
+    this.instance.projects.push(newProject);
+
+  }
+  // we can access access static member in static method .
+  static getInstance() {
+    if (this.instance) {
+      return this.instance
+    }
+    console.log('hellgs');
+    this.instance = new ProjectState();
+    return this.instance;
+  }
+
+}
+const state = ProjectState.getInstance();
+class ProjectList {
+  templateEl: HTMLTemplateElement;
+  hostEl: HTMLDivElement;
+  element: HTMLFormElement;
+  constructor(private type: 'active' | 'finished') {
+    this.templateEl = document.querySelector('#project-list')! as HTMLTemplateElement;
+    this.hostEl = document.querySelector('#app')! as HTMLDivElement;
+    const importContent = document.importNode(this.templateEl.content, true);
+    this.element = importContent.firstElementChild as HTMLFormElement;
+    this.element.id = `${this.type}-project`;
+    this.attach();
+    this.renderContentProjecgtList();
+
+
+  }
+
+  private attach(): void {
+    this.hostEl.insertAdjacentElement('beforeend', this.element);
+  }
+
+  private renderContentProjecgtList(): void {
+    const List = `${this.type}-project`;
+    this.element.querySelector('ul')!.id = List;
+    this.element.querySelector('h2')!.textContent = this.type.toUpperCase() + " " + 'PROJECTS';
+
+  }
+}
+
+// Project Class Start
 class Project {
   templateEl: HTMLTemplateElement;
   hostEl: HTMLDivElement;
@@ -74,6 +133,7 @@ class Project {
   }
   private attach() {
     this.hostEl.insertAdjacentElement('afterbegin', this.element);
+    console.log('hi')
   }
   @autoBind
   private submitHandler(event: Event) {
@@ -81,7 +141,8 @@ class Project {
     const userInput = this.gatherInput();
     if (Array.isArray(userInput)) {
       const [title, description, people] = userInput;
-      console.log(title, description, people);
+      ProjectState.addProject(...userInput);
+
       this.clearInput();
     }
   }
@@ -116,5 +177,11 @@ class Project {
     }
   }
 }
+
+
+// Project Class Ends
 const proj = new Project();
+const projlist = new ProjectList('active');
+const projlist1 = new ProjectList('finished');
+
 
